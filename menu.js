@@ -21,50 +21,43 @@ function createSidebar() {
     // 1. Sidebar Container
     const sidebar = document.createElement('div');
     sidebar.id = 'sidebar';
-    sidebar.className = 'sidebar-hidden'; // CSS se handle hoga
-
-    // 2. Menu Items Loop
-    let menuHTML = `<div class="sidebar-header">Menu</div><ul>`;
+    
+    let menuHTML = `<div class="sidebar-header" style="padding: 20px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); color: #D4AF37;">MENU</div><ul style="list-style: none; padding: 10px;">`;
     menuItems.forEach(item => {
-        menuHTML += `<li><a href="${item.link}">${item.icon} ${item.name}</a></li>`;
+        menuHTML += `<li style="padding: 12px 15px;"><a href="${item.link}" style="text-decoration: none; color: white; display: block;">${item.icon} ${item.name}</a></li>`;
     });
     menuHTML += `</ul>`;
     sidebar.innerHTML = menuHTML;
 
-    // 3. Three-Line Toggle Button (Transparent)
+    // 2. Three-Line Toggle Button
     const toggleBtn = document.createElement('button');
     toggleBtn.id = 'menu-toggle';
     toggleBtn.innerHTML = '<span></span><span></span><span></span>';
     
-    // 4. Overlay (Sidebar ke bahar touch detect karne ke liye)
+    // 3. Overlay
     const overlay = document.createElement('div');
     overlay.id = 'sidebar-overlay';
 
-    // Append to Body
     document.body.appendChild(toggleBtn);
     document.body.appendChild(sidebar);
     document.body.appendChild(overlay);
 
-    // --- EVENT LISTENERS ---
-
-    // Toggle click function
-    toggleBtn.addEventListener('click', (e) => {
+    // Toggle Function
+    toggleBtn.onclick = function(e) {
         e.stopPropagation();
         sidebar.classList.toggle('sidebar-active');
         overlay.classList.toggle('overlay-active');
-    });
+    };
 
-    // Outside click logic (Overlay par touch/click)
-    overlay.addEventListener('click', () => {
+    // Close on Outside Click
+    overlay.onclick = function() {
         sidebar.classList.remove('sidebar-active');
         overlay.classList.remove('overlay-active');
-    });
-
-    // Sidebar ke andar click hone par band na ho
-    sidebar.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
+    };
 }
 
-// Page load hone par menu create karein
-document.addEventListener('DOMContentLoaded', createSidebar);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', createSidebar);
+} else {
+    createSidebar();
+}
