@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lalit International School - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="header-brand"></div>
+    <div id="sidebar-overlay"></div>
+
+    <div class="main-content">
+        <div class="search-container">
+            <input type="text" placeholder="Search students, fees, or staff...">
+            <button class="btn-royal">Search</button>
+        </div>
+
+        <div id="firebase-status" class="card" style="border-left: 10px solid #ccc;">
+            <h3>System Status</h3>
+            <p id="status-text">Checking Firebase Connection...</p>
+        </div>
+
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <div class="card">
+                <h4>Total Students</h4>
+                <h2 style="color: var(--royal-purple);">1,250</h2>
+            </div>
+            <div class="card">
+                <h4>Monthly Fees</h4>
+                <h2 style="color: #27ae60;">₹4,50,000</h2>
+            </div>
+            <div class="card">
+                <h4>Staff Members</h4>
+                <h2 style="color: var(--primary-gold);">85</h2>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+            <div class="card" style="flex: 2; min-width: 300px;">
+                <h3>Recent Transactions (Ledger)</h3>
+                <table class="ledger-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Student Name</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#101</td>
+                            <td>Dev Raj</td>
+                            <td>₹12,000</td>
+                            <td style="color: green;">Paid</td>
+                        </tr>
+                        <tr>
+                            <td>#102</td>
+                            <td>Aryan Singh</td>
+                            <td>₹8,500</td>
+                            <td style="color: orange;">Pending</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="id-card">
+                <div class="img-frame">
+                    <img src="https://via.placeholder.com/100" class="profile-img" alt="User">
+                </div>
+                <h3 style="margin-top: 10px;">Dev Raj</h3>
+                <p>Class: 10th</p>
+                <p>Roll No: 24</p>
+                <button class="btn-royal" onclick="showPopup()" style="margin-top: 10px; font-size: 12px;">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup-box" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 15px; box-shadow: 0 0 50px rgba(0,0,0,0.5); z-index: 2000; border: 2px solid var(--primary-gold);">
+        <h3>Quick Notification</h3>
+        <p>Aapka Branding aur Style bilkul sahi kaam kar raha hai!</p>
+        <button class="btn-royal" onclick="hidePopup()">Close</button>
+    </div>
+
+    <script src="branding.js"></script>
+    <script src="menu.js"></script>
+    
+    <script type="module">
+        // Hum check kar rahe hain ki Firebase initialize hua ya nahi
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        
+        // Aapka firebaseConfig (Spark Plan)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            projectId: "the-lalit-d7472", // Aapke project ID ke mutabik
+            // ... baaki details aap firebase-config.js se lenge
+        };
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            if (app) {
+                document.getElementById('firebase-status').style.borderColor = "green";
+                document.getElementById('status-text').innerHTML = "✅ Firebase Connected Successfully (Spark Plan)";
+                document.getElementById('status-text').style.color = "green";
+            }
+        } catch (e) {
+            document.getElementById('firebase-status').style.borderColor = "red";
+            document.getElementById('status-text').innerHTML = "❌ Firebase Connection Failed. Check your configuration.";
+            document.getElementById('status-text').style.color = "red";
+        }
+
+        // Popup functions
+        window.showPopup = () => { document.getElementById('popup-box').style.display = 'block'; };
+        window.hidePopup = () => { document.getElementById('popup-box').style.display = 'none'; };
+    </script>
+</body>
+</html>
 
