@@ -1,119 +1,160 @@
-/* Custom Variables - The Lalit International School */
+/* --- THE LALIT INTERNATIONAL SCHOOL - MASTER STYLE SHEET --- */
+
 :root {
-    --primary-gold: #D4AF37; 
-    --royal-purple: #4B0082; 
-    --light-gold: #FFD700;
-    --text-dark: #2c3e50;
-    --bg-light: #f4f7f6;
+    --royal-blue: #1a237e;      /* Heading and text color from image */
+    --gold-accent: #D4AF37;    /* Logo and border gold */
+    --gold-light: #fdf9e9;     /* Very light gold background */
+    --deep-purple: #3e105e;    /* Fee portal header color */
     --white: #ffffff;
-    --shadow: 0 4px 15px rgba(0,0,0,0.1);
+    --black-btn: #1c1c1c;      /* Search button black */
+    --text-gray: #7f8c8d;      /* Subtitle color */
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', serif; /* Royal look ke liye */
+}
 
-body { background-color: var(--bg-light); overflow-x: hidden; }
+body {
+    background-color: var(--gold-light);
+    color: var(--royal-blue);
+    text-align: center;
+}
 
-/* --- SIDEBAR & OVERLAY --- */
+/* --- HEADER & BRANDING --- */
+header, .branding-container {
+    padding: 20px;
+    background: var(--white);
+    border-bottom: 2px solid var(--gold-accent);
+}
+
+.school-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--royal-blue);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    color: var(--gold-accent);
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    margin-top: 5px;
+}
+
+/* --- FEE COLLECTION PORTAL (Image jaisa design) --- */
+.fee-portal-card {
+    max-width: 600px;
+    margin: 50px auto;
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid var(--gold-accent);
+}
+
+.portal-header {
+    background: linear-gradient(to bottom, #4a148c, #311b92); /* Purple/Blue gradient from image */
+    padding: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.portal-header h2 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.portal-body {
+    padding: 40px 30px;
+    text-align: left;
+}
+
+.portal-body label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--royal-blue);
+}
+
+.portal-body input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.btn-search {
+    width: 100%;
+    padding: 15px;
+    background: var(--black-btn);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+}
+
+/* --- TOGGLE MENU (Blue & Gold) --- */
+#menu-toggle {
+    position: fixed;
+    top: 25px;
+    left: 20px;
+    z-index: 1001;
+    background: var(--royal-blue);
+    border: 1px solid var(--gold-accent);
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--gold-accent);
+    margin: 4px 0;
+}
+
+/* --- SIDEBAR --- */
 #sidebar {
     position: fixed;
     top: 0;
-    left: -280px; /* Hidden by default */
+    left: -280px;
     width: 280px;
-    height: 100vh;
-    background: linear-gradient(180deg, var(--royal-purple), #2a004a);
+    height: 100%;
+    background: var(--royal-blue);
     color: var(--white);
-    transition: all 0.4s ease;
+    transition: 0.4s;
     z-index: 1000;
-    box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+    text-align: left;
+    padding-top: 80px;
 }
 
 .sidebar-active { left: 0 !important; }
 
-#sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: none;
-    z-index: 999;
-}
-
-.overlay-active { display: block !important; }
-
-/* --- TOGGLE BUTTON --- */
-#menu-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1001;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid var(--primary-gold);
-    padding: 8px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-#menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--primary-gold);
+#sidebar ul li a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 15px 25px;
     display: block;
-    transition: 0.3s;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-/* --- UI ELEMENTS --- */
-.main-content { padding: 80px 20px 20px; }
-
-.card {
-    background: var(--white);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: var(--shadow);
-    border-top: 4px solid var(--primary-gold);
-    margin-bottom: 20px;
+#sidebar ul li a:hover {
+    background: var(--gold-accent);
+    color: var(--royal-blue);
 }
-
-.search-container { display: flex; gap: 10px; margin-bottom: 25px; }
-
-input[type="text"] {
-    flex: 1;
-    padding: 12px 20px;
-    border: 2px solid #ddd;
-    border-radius: 25px;
-    outline: none;
-}
-
-.btn-royal {
-    background: linear-gradient(45deg, var(--primary-gold), var(--light-gold));
-    color: var(--royal-purple);
-    border: none;
-    padding: 10px 25px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.ledger-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.ledger-table th { background: var(--royal-purple); color: var(--primary-gold); padding: 12px; text-align: left; }
-.ledger-table td { padding: 10px; border-bottom: 1px solid #eee; }
-
-.id-card {
-    width: 280px;
-    background: white;
-    border: 2px solid var(--primary-gold);
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-}
-
-.profile-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary-gold); }
